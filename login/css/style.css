@@ -17,7 +17,24 @@ body {
     left: 698px;  /* distance from the left */
     font-size: 24px;
     color: black;
-      font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   
+
+  .sigma {
+    position: absolute;
+    top: 173px;   /* distance from the top */
+    left: 698px;  /* distance from the left */
+    font-size: 24px;
+    color: black;
+    font-family: 'Inter', sans-serif;
+  }
+  
+
+  .positioned-image {
+    position: absolute;
+    left: 772px;
+    top: 332.5px;
+}
+
   
