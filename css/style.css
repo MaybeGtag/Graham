@@ -5,11 +5,12 @@ body {
     color: #333;
   }
   
-  .hero .sigma {
+  .hero {
     padding: 100px 20px;
     text-align: center;
-    font-weight: bold;
+      
   }
+
 
   .positioned-text {
     position: absolute;
