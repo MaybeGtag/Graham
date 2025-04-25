@@ -1,0 +1,21 @@
+/* style.css */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  .hero {
+    padding: 100px 20px;
+    text-align: center;
+  }
+
+  .positioned-text {
+    position: absolute;
+    top: 173px;   /* distance from the top */
+    left: 698px;  /* distance from the left */
+    font-size: 24px;
+    color: black;
+  }
+  
+  
