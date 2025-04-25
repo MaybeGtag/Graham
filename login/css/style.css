@@ -32,12 +32,12 @@ body {
   
 
   .positioned-image {
-    position: absolute;
+    position: fixed;
     left: 772px;
     top: 332.5px;
 }
   .friggincalss {
-    position: absolute;
+    position: fixed;
     left: 698px;
     top: 173px;
   }
