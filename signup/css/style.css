@@ -1,0 +1,269 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and Container */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px; /* Limit the width to fit within the viewport */
+  padding: 20px;
+  position: relative;
+}
+
+/* Header Text */
+.header {
+  margin-bottom: 2.5px;
+}
+
+.header-text {
+  font-weight: 750;
+  font-size: 3rem; /* Make the header text smaller */
+  text-align: center;
+}
+
+/* Logo */
+.logo-img {
+  display: block;
+  margin: 0 auto 0 auto; /* Center the logo */
+  width: 75px;
+  height: 75px;
+}
+
+/* Login Box */
+.login-box {
+  width: 100%;
+  max-width: 375px;
+  height: auto;
+  padding: 20px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+  background-color: #E8E8E8;
+  border-radius: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.form-sub-label {
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.input-field {
+  width: 100%;
+  max-width: 327px;
+  height: 40px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.continue-btn {
+  width: 100%;
+  max-width: 327px;
+  height: 40px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #000000;
+  color: white;
+  font-weight: 14;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.continue-btn:hover {
+  background-color: #111111;
+}
+
+.footer-label {
+  font-weight: 400;
+  font-size: 0.875rem;
+  margin-top: 20px;
+  text-align: center;
+  display: block;
+  color: #828282;
+  margin: 20;
+}
+
+
+
+.googleisng {
+  width: 100%;
+  max-width: 327px;
+  height: 40px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #000000;
+  color: white;
+  font-weight: 14;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #DEDEDE;
+  color: #000000;
+}
+
+
+.googleisng {
+  width: 327px;
+  height: 40px;
+  position: relative;
+  background: #DEDEDE;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center; /* Ensures both image and text are centered vertically */
+  justify-content: center;
+  gap: 10px; /* Space between the image and text */
+  cursor: pointer;
+}
+
+.googleisng-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.googleisng-text {
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  line-height: 19.6px;
+  color: black;
+}
+
+/* Hover effect */
+.googleisng:hover {
+  background: #efefef; /* Change background color to blue */
+}
+
+.googleisng:hover .googleisng-text {
+  color: #111111; /* Change text color to white on hover */
+}
+
+.googleisng:hover .googleisng-icon path {
+  fill: white; /* Change the icon color to white on hover */
+}
+
+.appleisng {
+  width: 100%;
+  max-width: 327px;
+  height: 40px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #000000;
+  color: white;
+  font-weight: 14;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #DEDEDE;
+  color: #000000;
+}
+
+
+.appleisng {
+  width: 327px;
+  height: 40px;
+  position: relative;
+  background: #DEDEDE;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center; /* Ensures both image and text are centered vertically */
+  justify-content: center;
+  gap: 10px; /* Space between the image and text */
+  cursor: pointer;
+}
+
+.appleisng-icon {
+  width: 22.5px;
+  height: 20px;
+}
+
+.appleisng-text {
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  line-height: 19.6px;
+  color: black;
+}
+
+/* Hover effect */
+.appleisng:hover {
+  background: #efefef; /* Change background color to blue */
+}
+
+.appleisng:hover .googleisng-text {
+  color: #111111; /* Change text color to white on hover */
+}
+
+.appleisng:hover .googleisng-icon path {
+  fill: white; /* Change the icon color to white on hover */
+}
+
+
+.discordisng {
+  margin-top: 20px;
+  width: 327px;
+  height: 40px;
+  position: relative;
+  background: #DEDEDE;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center; /* Ensures both image and text are centered vertically */
+  justify-content: center;
+  gap: 0px; /* Space between the image and text */
+  cursor: pointer;
+}
+.discordisng-icon {
+  width: 52.5px;
+  height: 30px;
+}
+
+.discordisng-text {
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  line-height: 19.6px;
+  color: black;
+}
+
+/* Hover effect */
+.discordisng:hover {
+  background: #efefef; /* Change background color to blue */
+}
+
+.discordisng:hover .googleisng-text {
+  color: #111111; /* Change text color to white on hover */
+}
+
+.discordisng:hover .googleisng-icon path {
+  fill: white; /* Change the icon color to white on hover */
+}
