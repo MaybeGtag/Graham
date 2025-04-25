@@ -1,44 +1,104 @@
-/* style.css */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #ffffff;
-    color: #333;
-  }
-  
-  .hero .sigma {
-    padding: 100px 20px;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .positioned-text {
-    position: absolute;
-    top: 173px;   /* distance from the top */
-    left: 698px;  /* distance from the left */
-    font-size: 24px;
-    color: black;
-    font-family: 'Inter', sans-serif;
-  }
-  
-
-  .sigma {
-    position: absolute;
-    top: 173px;   /* distance from the top */
-    left: 698px;  /* distance from the left */
-    font-size: 24px;
-    color: black;
-    font-family: 'Inter', sans-serif;
-  }
-  
-
-  .positioned-image {
-    position: fixed;
-    left: 772px;
-    top: 332.5px;
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-  .friggincalss {
-    position: fixed;
-    left: 698px;
-    top: 173px;
-  }
-  
+
+/* Body and Container */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+.header {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+
+.header-text {
+  position: absolute;
+  top: 173px;
+  left: 698px;
+  font-weight: 600;
+  font-size: 50px;
+}
+
+.logo-img {
+  position: absolute;
+  top: 251px;
+  left: 922px;
+  width: 75px;
+  height: 75px;
+}
+
+/* Login Box */
+.login-box {
+  position: absolute;
+  top: 332.5px;
+  left: 772px;
+  width: 375px;
+  height: 431px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 16px;
+  text-align: left;
+  margin-top: 0;
+}
+
+.form-sub-label {
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+  margin-top: 26px;
+}
+
+.input-field {
+  width: 327px;
+  height: 40px;
+  margin-top: 71px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.continue-btn {
+  width: 327px;
+  height: 40px;
+  margin-top: 56px;
+  border-radius: 8px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.continue-btn:hover {
+  background-color: #45a049;
+}
+
+.footer-label {
+  position: absolute;
+  font-weight: 400;
+  font-size: 14px;
+  top: 191px;
+  left: 44px;
+  text-align: center;
+}
