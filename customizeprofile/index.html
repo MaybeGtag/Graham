@@ -31,11 +31,6 @@
     async function handleSignup() {
   const username = document.getElementById('passwordInput').value.trim();
 
-  if (!password) {
-    alert("Please enter a username.");
-    return;
-  }
-
   try {
     const res = await fetch('http://localhost:3000/signup', {
       method: 'POST',
