@@ -29,40 +29,41 @@
 
   <script>
     async function handleSignup() {
-      const password = document.getElementById('passwordInput').value.trim();
-      const email = localStorage.getItem('signupEmail');
+  const password = document.getElementById('passwordInput').value.trim();
+  const email = localStorage.getItem('signupEmail');
 
-      if (!email) {
-        alert("Email is missing. Please go back and enter your email first.");
-        return;
-      }
+  if (!email) {
+    alert("Email is missing. Please go back and enter your email first.");
+    return;
+  }
 
-      if (!password) {
-        alert("Please enter a password.");
-        return;
-      }
+  if (!password) {
+    alert("Please enter a password.");
+    return;
+  }
 
-      try {
-        const res = await fetch('http://localhost:3000/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email, password })
-        });
+  try {
+    const res = await fetch('http://localhost:3000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-        if (!res.ok) {
-          const message = await res.text();
-          throw new Error(message);
-        }
-
-        alert("Account created successfully!");
-        // Optionally redirect to login or home page
-        // window.location.href = "/login";
-      } catch (err) {
-        alert("Error: " + err.message);
-      }
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error(message);
     }
+
+    alert("Account created successfully!");
+    // Redirect to /home after signup
+    window.location.href = "/home";
+  } catch (err) {
+    alert("Error: " + err.message);
+  }
+}
+
   </script>
 
 </body>
