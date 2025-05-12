@@ -18,9 +18,9 @@
 
     <div class="login-box">
       <div class="form">
-        <div class="form-label">Choose a password</div>
-        <div class="form-sub-label">Choose a secure password for your account</div>
-        <input class="input-field" id="passwordInput" type="password" placeholder="password">
+        <div class="form-label">Choose a username</div>
+        <div class="form-sub-label">Choose a username for your account</div>
+        <input class="input-field" id="passwordInput" type="text" placeholder="username">
 
         <button class="continue-btn" onclick="handleSignup()">Continue</button>
       </div>
@@ -29,16 +29,10 @@
 
   <script>
     async function handleSignup() {
-  const password = document.getElementById('passwordInput').value.trim();
-  const email = localStorage.getItem('signupEmail');
-
-  if (!email) {
-    alert("Email is missing. Please go back and enter your email first.");
-    return;
-  }
+  const username = document.getElementById('passwordInput').value.trim();
 
   if (!password) {
-    alert("Please enter a password.");
+    alert("Please enter a username.");
     return;
   }
 
@@ -48,7 +42,7 @@
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ username })
     });
 
     if (!res.ok) {
@@ -56,9 +50,9 @@
       throw new Error(message);
     }
 
-    alert("Account created successfully!");
+    alert("Username added!");
     // Redirect to /home after signup
-    window.location.href = "/customizeprofile";
+    window.location.href = "/home";
   } catch (err) {
     alert("Error: " + err.message);
   }
