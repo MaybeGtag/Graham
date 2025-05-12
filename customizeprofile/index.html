@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Choose Password</title>
+  <title>Choose Username</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -20,7 +20,7 @@
       <div class="form">
         <div class="form-label">Choose a username</div>
         <div class="form-sub-label">Choose a username for your account</div>
-        <input class="input-field" id="passwordInput" type="text" placeholder="username">
+        <input class="input-field" id="usernameChooser" type="text" placeholder="username">
 
         <button class="continue-btn" onclick="handleSignup()">Continue</button>
       </div>
@@ -29,10 +29,10 @@
 
   <script>
     async function handleSignup() {
-  const username = document.getElementById('passwordInput').value.trim();
+  const username = document.getElementById('usernameChooser').value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/signup', {
+    const res = await fetch('http://192.168.1.222:3000/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
