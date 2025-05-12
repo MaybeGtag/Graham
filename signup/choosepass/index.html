@@ -20,12 +20,48 @@
       <div class="form">
         <div class="form-label">Choose a password</div>
         <div class="form-sub-label">Choose a secure password for your account</div>
-        <input class="input-field" type="password" placeholder="password">
+        <input class="input-field" id="passwordInput" type="password" placeholder="password">
 
-        <button class="continue-btn">Continue</button>
+        <button class="continue-btn" onclick="handleSignup()">Continue</button>
       </div>
     </div>
   </div>
 
+  <script>
+    function handleSignup() {
+      const email = localStorage.getItem('signup_email');
+      const password = document.getElementById('passwordInput').value.trim();
+
+      if (!email) {
+        alert("Missing email. Please go back and enter your email first.");
+        window.location.href = "/signup"; // fallback redirect
+        return;
+      }
+
+      if (!password || password.length < 6) {
+        alert("Password must be at least 6 characters.");
+        return;
+      }
+
+      // Send to server
+      fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+      .then(res => res.text())
+      .then(response => {
+        alert("Account created successfully!");
+        console.log("Server response:", response);
+        // Optional: Redirect to dashboard or login
+      })
+      .catch(err => {
+        alert("Signup failed.");
+        console.error("Error:", err);
+      });
+    }
+  </script>
 </body>
 </html>

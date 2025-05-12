@@ -24,46 +24,41 @@
 
         <button class="continue-btn" onclick="handleContinue()">Continue</button>
 
-
         <div class="footer-label">- or -</div>
-
 
         <button class="googleisng">
             <img src="../images/image (33).png" alt="icon" class="googleisng-icon" width="20px" height="20px">
             <span class="googleisng-text">Continue with Google</span>
-          </button>    
-          
-          <button class="appleisng">
+        </button>    
+        
+        <button class="appleisng">
             <img src="../images/image (34).png" alt="icon" class="appleisng-icon" width="20px" height="20px">
             <span class="appleisng-text">Continue with Apple</span>
-          </button>   
+        </button>   
 
-          <button class="discordisng">
+        <button class="discordisng">
             <img src="../images/image (35).png" alt="icon" class="discordisng-icon" width="20px" height="20px">
             <span class="discordisng-text">Continue with Discord</span>
-          </button>   
+        </button>   
       </div>
     </div>
   </div>
+
   <script>
     function isValidEmail(email) {
-      // Basic email validation
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return regex.test(email);
     }
-  
+
     function handleContinue() {
       const email = document.getElementById('emailInput').value.trim();
       if (isValidEmail(email)) {
-        // Redirect if email is valid
+        localStorage.setItem('signup_email', email); // Save email locally
         window.location.href = "https://maybegtaggraham.netlify.app/signup/choosepass/";
       } else {
         alert("Please enter a valid email address.");
       }
     }
   </script>
-  
-
-
 </body>
 </html>
