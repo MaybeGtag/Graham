@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Choose Password</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -28,40 +28,42 @@
   </div>
 
   <script>
-    function handleSignup() {
-      const email = localStorage.getItem('signup_email');
+    async function handleSignup() {
       const password = document.getElementById('passwordInput').value.trim();
+      const email = localStorage.getItem('signupEmail');
 
       if (!email) {
-        alert("Missing email. Please go back and enter your email first.");
-        window.location.href = "/signup"; // fallback redirect
+        alert("Email is missing. Please go back and enter your email first.");
         return;
       }
 
-      if (!password || password.length < 6) {
-        alert("Password must be at least 6 characters.");
+      if (!password) {
+        alert("Please enter a password.");
         return;
       }
 
-      // Send to server
-      fetch('http://localhost:3000/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      })
-      .then(res => res.text())
-      .then(response => {
+      try {
+        const res = await fetch('http://localhost:3000/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error(message);
+        }
+
         alert("Account created successfully!");
-        console.log("Server response:", response);
-        // Optional: Redirect to dashboard or login
-      })
-      .catch(err => {
-        alert("Signup failed.");
-        console.error("Error:", err);
-      });
+        // Optionally redirect to login or home page
+        // window.location.href = "/login";
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
     }
   </script>
+
 </body>
 </html>

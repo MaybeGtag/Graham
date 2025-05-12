@@ -51,14 +51,15 @@
     }
 
     function handleContinue() {
-      const email = document.getElementById('emailInput').value.trim();
-      if (isValidEmail(email)) {
-        localStorage.setItem('signup_email', email); // Save email locally
-        window.location.href = "https://maybegtaggraham.netlify.app/signup/choosepass/";
-      } else {
-        alert("Please enter a valid email address.");
-      }
-    }
+  const email = document.getElementById('emailInput').value.trim();
+  if (isValidEmail(email)) {
+    localStorage.setItem('signupEmail', email); // Save email
+    window.location.href = "https://maybegtaggraham.netlify.app/signup/choosepass/";
+  } else {
+    alert("Please enter a valid email address.");
+  }
+}
+
   </script>
 </body>
 </html>
