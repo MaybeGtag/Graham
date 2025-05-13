@@ -57,6 +57,7 @@
     }
 
     alert("Account created successfully!");
+    localStorage.setItem('password', password); // Save email
     // Redirect to /home after signup
     window.location.href = "/customizeprofile";
   } catch (err) {
