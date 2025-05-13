@@ -29,12 +29,12 @@
 
   <script>
     async function handleSignup() {
-  const username = document.getElementById('usernameChooser').value.trim();
+  const username = null;
   const email = localStorage.getItem('signupEmail');
-  const password = localStorage.getItem('password');
+  const password = document.getElementById("passwordInput").value;
   const displayName = username; // Or a separate input field if preferred
 
-  if (!email || !password || !username) {
+  if (!email || !password) {
     alert("Missing information. Please make sure all fields are filled.");
     return;
   }
