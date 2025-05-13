@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User List</title>
+  <title>Home</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@
     // Fetch all users from your server
     async function fetchUsers() {
   try {
-    const response = await fetch('https://your-server-url.com/accounts.json');
+    const response = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/accounts');
     if (!response.ok) {
       throw new Error('Error fetching users');
     }
@@ -54,74 +54,6 @@
   }
 }
 
-
-    // Call fetchUsers on page load
-    window.onload = fetchUsers;
-  </script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User List</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .user-list {
-      margin-top: 20px;
-    }
-    .user-item {
-      background: #f9f9f9;
-      border: 1px solid #ddd;
-      margin: 5px 0;
-      padding: 10px;
-    }
-    .user-item p {
-      margin: 5px 0;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>User List</h1>
-
-  <div class="user-list" id="userList"></div>
-
-  <script>
-    // Fetch all users from your server
-    async function fetchUsers() {
-      try {
-        // Replace with your actual API URL that serves the accounts.json
-        const response = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/signup');  
-        const users = await response.json(); // Parse the JSON data
-        
-        // Select the user list container
-        const userListElement = document.getElementById("userList");
-
-        // Clear any existing content
-        userListElement.innerHTML = "";
-
-        // Loop through the users and display their information
-        users.forEach(user => {
-          const userItem = document.createElement('div');
-          userItem.classList.add('user-item');
-
-          userItem.innerHTML = `
-            <p><strong>Email:</strong> ${user.email}</p>
-            <p><strong>Display Name:</strong> ${user.displayName}</p>
-          `;
-
-          userListElement.appendChild(userItem);
-        });
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        alert('Failed to load users.');
-      }
-    }
 
     // Call fetchUsers on page load
     window.onload = fetchUsers;
