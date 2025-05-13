@@ -32,9 +32,10 @@
     // Fetch all users from your server
     async function fetchUsers() {
       try {
-        const response = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/signup');  // Replace with your actual API URL
-        const users = await response.json(); // Assuming the server responds with a JSON array of users
-
+        // Replace with your actual API URL that serves the accounts.json
+        const response = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/signup');  
+        const users = await response.json(); // Parse the JSON data
+        
         // Select the user list container
         const userListElement = document.getElementById("userList");
 
