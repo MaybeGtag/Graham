@@ -29,8 +29,8 @@
 
   <script>
     async function handleSignup() {
-  const username = email;
   const email = localStorage.getItem('signupEmail');
+  const username = email;
   const password = document.getElementById("passwordInput").value;
   const displayName = email.split('@')[0]; // Or a separate input field if preferred
 
