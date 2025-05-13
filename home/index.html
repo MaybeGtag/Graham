@@ -29,37 +29,53 @@
   <div class="user-list" id="userList"></div>
 
   <script>
-    // Fetch all users from your server
     const fetchUsers = async () => {
       try {
-        // Await the fetch request to get the response
         const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/accounts', {
           method: 'GET',
           headers: new Headers({
-            'ngrok-skip-browser-warning': 'true', // Set it as a string
+            'ngrok-skip-browser-warning': 'true',
           }),
         });
-
-        console.log(res);
   
-        // Check if the response is successful
         if (!res.ok) {
           throw new Error('Failed to fetch users');
         }
   
-        // Await the response to get the JSON data
         const data = await res.json();
-        console.log(data); // Log the fetched data (users)
+        console.log(data);
   
-        // Continue with your logic to display users...
+        const userList = document.getElementById('userList');
+        userList.innerHTML = ''; // Clear existing content
+  
+        if (data.length === 0) {
+          userList.innerHTML = '<p>No users found.</p>';
+          return;
+        }
+  
+        // Create user elements
+        data.forEach(user => {
+          const div = document.createElement('div');
+          div.className = 'user-item';
+  
+          div.innerHTML = `
+            <p><strong>Username:</strong> ${user.username || 'N/A'}</p>
+            <p><strong>Email:</strong> ${user.email || 'N/A'}</p>
+            <p><strong>Display Name:</strong> ${user.displayName || 'N/A'}</p>
+          `;
+  
+          userList.appendChild(div);
+        });
+  
       } catch (error) {
         console.error('Error fetching users:', error);
+        document.getElementById('userList').innerHTML = '<p style="color:red;">Failed to load users.</p>';
       }
     };
   
-    // Call the fetchUsers function when you need to fetch users
     fetchUsers();
   </script>
+  
   
 
 </body>
