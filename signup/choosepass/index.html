@@ -29,16 +29,13 @@
 
   <script>
     async function handleSignup() {
-  const password = document.getElementById('passwordInput').value.trim();
+  const username = document.getElementById('usernameChooser').value.trim();
   const email = localStorage.getItem('signupEmail');
+  const password = localStorage.getItem('password');
+  const displayName = username; // Or a separate input field if preferred
 
-  if (!email) {
-    alert("Email is missing. Please go back and enter your email first.");
-    return;
-  }
-
-  if (!password) {
-    alert("Please enter a password.");
+  if (!email || !password || !username) {
+    alert("Missing information. Please make sure all fields are filled.");
     return;
   }
 
@@ -48,7 +45,7 @@
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password, username, displayName })
     });
 
     if (!res.ok) {
@@ -56,14 +53,13 @@
       throw new Error(message);
     }
 
-    alert("Account created successfully!");
-    localStorage.setItem('password', password); // Save email
-    // Redirect to /home after signup
-    window.location.href = "/customizeprofile";
+    alert("Username added successfully!");
+    window.location.href = "/home";
   } catch (err) {
     alert("Error: " + err.message);
   }
 }
+
 
   </script>
 
