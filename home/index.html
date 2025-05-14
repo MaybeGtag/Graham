@@ -71,6 +71,14 @@
         console.error('Error fetching users:', error);
         document.getElementById('userList').innerHTML = '<p style="color:red;">Failed to load users.</p>';
       }
+
+       // Example check on page load
+  window.onload = function () {
+    const isLoggedIn = localStorage.getItem('Loggedin');
+    if (isLoggedIn !== 'true') {
+      window.location.href = '/login';
+    }
+  };
     };
   
     fetchUsers();

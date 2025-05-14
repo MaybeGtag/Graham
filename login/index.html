@@ -52,6 +52,7 @@
           }),
         });
         if (!res.ok) throw new Error("Failed to fetch account list.");
+        localStorage.setItem('Loggedin', "true"); // Save email
   
         const accounts = await res.json();
   
