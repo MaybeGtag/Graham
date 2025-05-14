@@ -83,9 +83,6 @@ async function fetchPosts() {
       method: 'GET',
       headers: new Headers({
         'ngrok-skip-browser-warning': 'true',
-        'Access-Control-Allow-Origin': 'https://maybegtaggraham.netlify.app', // Ensure this matches your front-end URL
-        'Access-Control-Allow-Methods': 'GET',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, ngrok-skip-browser-warning',
       }),
     });
     if (!res.ok) throw new Error('Failed to fetch posts');
@@ -108,7 +105,6 @@ async function fetchPosts() {
           method: 'GET',
           headers: new Headers({
             'ngrok-skip-browser-warning': 'true',
-            'Access-Control-Allow-Origin': 'https://maybegtaggraham.netlify.app',
           }),
         })
           .then(r => r.text())
