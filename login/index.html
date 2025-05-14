@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -18,32 +18,50 @@
 
     <div class="login-box">
       <div class="form">
-        <div class="form-label">Create an account</div>
-        <div class="form-sub-label">Enter your email to sign up for this app</div>
-        <input class="input-field" type="email" placeholder="email@domain.com">
+        <div class="form-label">Log in</div>
+        <div class="form-sub-label">Enter your email and password</div>
+        
+        <input class="input-field" id="emailInput" type="email" placeholder="email@domain.com">
+        <input class="input-field" id="passwordInput" type="password" placeholder="password">
 
-        <button class="continue-btn">Continue</button>
-
-        <div class="footer-label">- or -</div>
-
-
-        <button class="googleisng">
-            <img src="../images/image (33).png" alt="icon" class="googleisng-icon" width="20px" height="20px">
-            <span class="googleisng-text">Continue with Google</span>
-          </button>    
-          
-          <button class="appleisng">
-            <img src="../images/image (34).png" alt="icon" class="appleisng-icon" width="20px" height="20px">
-            <span class="appleisng-text">Continue with Apple</span>
-          </button>   
-
-          <button class="discordisng">
-            <img src="../images/image (35).png" alt="icon" class="discordisng-icon" width="20px" height="20px">
-            <span class="discordisng-text">Continue with Discord</span>
-          </button>   
+        <button class="continue-btn" onclick="handleLogin()">Login</button>
       </div>
     </div>
   </div>
+
+  <script>
+    function isValidEmail(email) {
+      const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      return regex.test(email);
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById("emailInput").value.trim();
+      const password = document.getElementById("passwordInput").value;
+
+      if (!isValidEmail(email) || !password) {
+        alert("Please enter a valid email and password.");
+        return;
+      }
+
+      try {
+        const res = await fetch("https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/accounts");
+        if (!res.ok) throw new Error("Failed to retrieve accounts");
+
+        const accounts = await res.json();
+        const foundUser = accounts.find(acc => acc.email === email && acc.password === password);
+
+        if (foundUser) {
+          localStorage.setItem("loggedInEmail", email);
+          window.location.href = "/home";
+        } else {
+          alert("Invalid email or password.");
+        }
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    }
+  </script>
 
 </body>
 </html>
