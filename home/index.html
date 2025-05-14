@@ -38,7 +38,7 @@
   <div class="post-list" id="postList"></div>
 
   <script>
-    const NGROK_BASE = 'https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app';
+    const NGROK_BASE = 'https://75d3-2600-100f-a101-4e39-70f6-626-7ecc-2400.ngrok-free.app';
     const HEADERS = new Headers({
       'ngrok-skip-browser-warning': 'true',
     });
@@ -63,7 +63,7 @@
           // Handle different file types
           if (post.endsWith('.mp4')) {
             div.innerHTML = `<video controls src="${NGROK_BASE}/posts/${encodeURIComponent(post)}"></video>`;
-          } else if (post.endsWith('.png')) {
+          } else if (post.endsWith('.png', '.gif')) {
             div.innerHTML = `<img src="${NGROK_BASE}/posts/${encodeURIComponent(post)}" alt="${post}"/>`;
           } else if (post.endsWith('.txt')) {
             fetch(`${NGROK_BASE}/posts/${encodeURIComponent(post)}`, {
