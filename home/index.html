@@ -77,51 +77,40 @@
     }
 
     // Fetch posts
-    async function fetchPosts() {
-      try {
-        const res = await fetch(`${NGROK_BASE}/posts`, {
-          method: 'GET',
-          headers: HEADERS,
-        });
-        if (!res.ok) throw new Error('Failed to fetch posts');
-        const posts = await res.json();
+async function fetchPosts() {
+  try {
+    const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts');
+    if (!res.ok) throw new Error('Failed to fetch posts');
+    const posts = await res.json();
 
-        const postList = document.getElementById('postList');
-        postList.innerHTML = '';
+    const postList = document.getElementById('postList');
+    postList.innerHTML = '';
 
-        posts.forEach(post => {
-          const div = document.createElement('div');
-          div.className = 'post-item';
+    posts.forEach(post => {
+      const div = document.createElement('div');
+      div.className = 'post-item';
 
-          const postUrl = `${NGROK_BASE}/posts/${encodeURIComponent(post)}`;
-
-          if (post.endsWith('.mp4')) {
-            div.innerHTML = `<video controls src="${postUrl}"></video>`;
-            postList.appendChild(div);
-          } else if (post.endsWith('.png')) {
-            div.innerHTML = `<img src="${postUrl}" alt="${post}"/>`;
-            postList.appendChild(div);
-          } else if (post.endsWith('.txt')) {
-            fetch(postUrl, {
-              method: 'GET',
-              headers: HEADERS,
-            })
-              .then(r => r.text())
-              .then(text => {
-                div.innerHTML = `<pre>${text}</pre>`;
-                postList.appendChild(div);
-              })
-              .catch(err => {
-                div.innerHTML = `<p style="color:red;">Failed to load text.</p>`;
-                postList.appendChild(div);
-              });
-          }
-        });
-      } catch (error) {
-        console.error(error);
-        document.getElementById('postList').innerHTML = '<p style="color:red;">Failed to load posts.</p>';
+      // Handle different file types
+      if (post.endsWith('.mp4')) {
+        div.innerHTML = `<video controls src="https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}"></video>`;
+      } else if (post.endsWith('.png')) {
+        div.innerHTML = `<img src="https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}" alt="${post}"/>`;
+      } else if (post.endsWith('.txt')) {
+        fetch(`https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}`)
+          .then(r => r.text())
+          .then(text => {
+            div.innerHTML = `<pre>${text}</pre>`;
+          });
       }
-    }
+
+      postList.appendChild(div);
+    });
+  } catch (error) {
+    console.error(error);
+    document.getElementById('postList').innerHTML = '<p style="color:red;">Failed to load posts.</p>';
+  }
+}
+
 
     fetchUsers();
     fetchPosts();
