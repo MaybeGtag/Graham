@@ -22,12 +22,21 @@
         <div class="form-sub-label">Choose a secure password for your account</div>
         <input class="input-field" id="passwordInput" type="password" placeholder="password">
 
-        <button class="continue-btn" onclick="handleSignup()">Continue</button>
+        <button class="continue-btn"  id="continue-btn"   onclick="handleSignup()">Continue</button>
       </div>
     </div>
   </div>
 
   <script>
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    document.getElementById("continue-btn").click();
+  }
+});
+
+
+
     async function handleSignup() {
   const email = localStorage.getItem('signupEmail');
   const username = email;

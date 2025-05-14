@@ -24,12 +24,17 @@
         <input class="input-field" id="emailInput" type="email" placeholder="email@domain.com">
         <input class="input-field" id="passwordInput" type="password" placeholder="password">
 
-        <button class="continue-btn" onclick="handleLogin()">Login</button>
+        <button class="continue-btn" id="continue-btn" onclick="handleLogin()">Login</button>
       </div>
     </div>
   </div>
 
   <script>
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    document.getElementById("continue-btn").click();
+  }
+});
     function isValidEmail(email) {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return regex.test(email);
