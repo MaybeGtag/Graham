@@ -28,40 +28,49 @@
   </div>
 
   <script>
-    async function handleSignup() {
-  const email = localStorage.getItem('signupEmail');
-  const username = email;
-  const password = document.getElementById("passwordInput").value;
-  const displayName = email.split('@')[0]; // Or a separate input field if preferred
-
-  if (!email || !password) {
-    alert("Missing information. Please make sure all fields are filled.");
-    return;
-  }
-
-  try {
-    const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password, username, displayName })
-    });
-
-    if (!res.ok) {
-      const message = await res.text();
-      throw new Error(message);
+    function isValidEmail(email) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
     }
-
-    alert("Username added successfully!");
-    window.location.href = "/home";
-  } catch (err) {
-    alert("Error: " + err.message);
-  }
-}
-
-
+  
+    async function handleLogin() {
+      const email = document.getElementById("emailInput").value.trim();
+      const password = document.getElementById("passwordInput").value.trim();
+  
+      console.log("Email entered:", email);
+      console.log("Password entered:", password);
+  
+      if (!isValidEmail(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+  
+      if (!password) {
+        alert("Please enter your password.");
+        return;
+      }
+  
+      try {
+        const res = await fetch("https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/accounts");
+        if (!res.ok) throw new Error("Failed to retrieve accounts");
+  
+        const accounts = await res.json();
+        console.log("Accounts:", accounts);
+  
+        const foundUser = accounts.find(acc => acc.email === email && acc.password === password);
+  
+        if (foundUser) {
+          localStorage.setItem("loggedInEmail", email);
+          window.location.href = "/home";
+        } else {
+          alert("Invalid email or password.");
+        }
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    }
   </script>
+  
 
 </body>
 </html>

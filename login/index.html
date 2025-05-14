@@ -31,28 +31,32 @@
 
   <script>
     function isValidEmail(email) {
-      const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return regex.test(email);
     }
-
+  
     async function handleLogin() {
       const email = document.getElementById("emailInput").value.trim();
-      const password = document.getElementById("passwordInput").value;
-
+      const password = document.getElementById("passwordInput").value.trim();
+  
       if (!isValidEmail(email) || !password) {
         alert("Please enter a valid email and password.");
         return;
       }
-
+  
       try {
         const res = await fetch("https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/accounts");
-        if (!res.ok) throw new Error("Failed to retrieve accounts");
-
+        if (!res.ok) throw new Error("Failed to fetch account list.");
+  
         const accounts = await res.json();
-        const foundUser = accounts.find(acc => acc.email === email && acc.password === password);
-
-        if (foundUser) {
-          localStorage.setItem("loggedInEmail", email);
+  
+        const user = accounts.find(acc =>
+          acc.email.toLowerCase() === email.toLowerCase() &&
+          acc.password === password
+        );
+  
+        if (user) {
+          localStorage.setItem("loggedInEmail", user.email);
           window.location.href = "/home";
         } else {
           alert("Invalid email or password.");
@@ -62,6 +66,7 @@
       }
     }
   </script>
+  
 
 </body>
 </html>
