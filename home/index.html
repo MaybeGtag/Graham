@@ -21,12 +21,7 @@
       padding: 10px;
     }
 
-    video {
-      max-width: 100%;
-      height: auto;
-    }
-
-    img {
+    video, img {
       max-width: 100%;
       height: auto;
     }
@@ -45,6 +40,11 @@
   <div class="post-list" id="postList"></div>
 
   <script>
+    const NGROK_BASE = 'https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app';
+    const HEADERS = new Headers({
+      'ngrok-skip-browser-warning': 'true',
+    });
+
     window.onload = function () {
       const isLoggedIn = localStorage.getItem('Loggedin');
       if (isLoggedIn !== 'true') {
@@ -55,10 +55,9 @@
     // Fetch users
     async function fetchUsers() {
       try {
-        const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/accounts', {
-          headers: {
-            'ngrok-skip-browser-warning': 'true',
-          },
+        const res = await fetch(`${NGROK_BASE}/accounts`, {
+          method: 'GET',
+          headers: HEADERS,
         });
         if (!res.ok) throw new Error('Failed to fetch users');
         const data = await res.json();
@@ -80,10 +79,9 @@
     // Fetch posts
     async function fetchPosts() {
       try {
-        const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts', {
-          headers: {
-            'ngrok-skip-browser-warning': 'true',
-          },
+        const res = await fetch(`${NGROK_BASE}/posts`, {
+          method: 'GET',
+          headers: HEADERS,
         });
         if (!res.ok) throw new Error('Failed to fetch posts');
         const posts = await res.json();
@@ -95,19 +93,29 @@
           const div = document.createElement('div');
           div.className = 'post-item';
 
+          const postUrl = `${NGROK_BASE}/posts/${encodeURIComponent(post)}`;
+
           if (post.endsWith('.mp4')) {
-            div.innerHTML = `<video controls src="https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}"></video>`;
+            div.innerHTML = `<video controls src="${postUrl}"></video>`;
+            postList.appendChild(div);
           } else if (post.endsWith('.png')) {
-            div.innerHTML = `<img src="https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}" alt="${post}"/>`;
+            div.innerHTML = `<img src="${postUrl}" alt="${post}"/>`;
+            postList.appendChild(div);
           } else if (post.endsWith('.txt')) {
-            fetch(`https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}`)
+            fetch(postUrl, {
+              method: 'GET',
+              headers: HEADERS,
+            })
               .then(r => r.text())
               .then(text => {
                 div.innerHTML = `<pre>${text}</pre>`;
+                postList.appendChild(div);
+              })
+              .catch(err => {
+                div.innerHTML = `<p style="color:red;">Failed to load text.</p>`;
+                postList.appendChild(div);
               });
           }
-
-          postList.appendChild(div);
         });
       } catch (error) {
         console.error(error);
