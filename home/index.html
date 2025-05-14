@@ -29,6 +29,14 @@
   <div class="user-list" id="userList"></div>
 
   <script>
+       // Example check on page load
+       window.onload = function () {
+    const isLoggedIn = localStorage.getItem('Loggedin');
+    if (isLoggedIn !== 'true') {
+      window.location.href = '/login';
+    }
+  };
+
     const fetchUsers = async () => {
       try {
         const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/accounts', {
@@ -71,14 +79,6 @@
         console.error('Error fetching users:', error);
         document.getElementById('userList').innerHTML = '<p style="color:red;">Failed to load users.</p>';
       }
-
-       // Example check on page load
-  window.onload = function () {
-    const isLoggedIn = localStorage.getItem('Loggedin');
-    if (isLoggedIn !== 'true') {
-      window.location.href = '/login';
-    }
-  };
     };
   
     fetchUsers();
