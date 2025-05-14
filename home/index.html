@@ -76,10 +76,18 @@
       }
     }
 
-    // Fetch posts
+// Fetch posts
 async function fetchPosts() {
   try {
-    const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts');
+    const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts', {
+      method: 'GET',
+      headers: new Headers({
+        'ngrok-skip-browser-warning': 'true',
+        'Access-Control-Allow-Origin': 'https://maybegtaggraham.netlify.app', // Ensure this matches your front-end URL
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, ngrok-skip-browser-warning',
+      }),
+    });
     if (!res.ok) throw new Error('Failed to fetch posts');
     const posts = await res.json();
 
@@ -96,7 +104,13 @@ async function fetchPosts() {
       } else if (post.endsWith('.png')) {
         div.innerHTML = `<img src="https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}" alt="${post}"/>`;
       } else if (post.endsWith('.txt')) {
-        fetch(`https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}`)
+        fetch(`https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}`, {
+          method: 'GET',
+          headers: new Headers({
+            'ngrok-skip-browser-warning': 'true',
+            'Access-Control-Allow-Origin': 'https://maybegtaggraham.netlify.app',
+          }),
+        })
           .then(r => r.text())
           .then(text => {
             div.innerHTML = `<pre>${text}</pre>`;
@@ -110,6 +124,7 @@ async function fetchPosts() {
     document.getElementById('postList').innerHTML = '<p style="color:red;">Failed to load posts.</p>';
   }
 }
+
 
 
     fetchUsers();
