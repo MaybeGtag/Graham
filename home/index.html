@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>User List & Posts</title>
+  <title>Home</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
     }
 
-    .user-list, .post-list {
+    .post-list {
       margin-top: 20px;
     }
 
-    .user-item, .post-item {
+    .post-item {
       background: #f9f9f9;
       border: 1px solid #ddd;
       margin: 10px 0;
       padding: 10px;
+      border-radius: 5px;
     }
 
     video, img {
@@ -33,9 +34,6 @@
 </head>
 <body>
 
-  <h1>User List</h1>
-  <div class="user-list" id="userList"></div>
-
   <h1>Posts</h1>
   <div class="post-list" id="postList"></div>
 
@@ -45,85 +43,47 @@
       'ngrok-skip-browser-warning': 'true',
     });
 
-    window.onload = function () {
-      const isLoggedIn = localStorage.getItem('Loggedin');
-      if (isLoggedIn !== 'true') {
-        window.location.href = '/login';
-      }
-    };
-
-    // Fetch users
-    async function fetchUsers() {
+    // Fetch posts
+    async function fetchPosts() {
       try {
-        const res = await fetch(`${NGROK_BASE}/accounts`, {
+        const res = await fetch(`${NGROK_BASE}/posts`, {
           method: 'GET',
           headers: HEADERS,
         });
-        if (!res.ok) throw new Error('Failed to fetch users');
-        const data = await res.json();
+        if (!res.ok) throw new Error('Failed to fetch posts');
+        const posts = await res.json();
 
-        const userList = document.getElementById('userList');
-        userList.innerHTML = data.map(user => `
-          <div class="user-item">
-            <p><strong>Username:</strong> ${user.username || 'N/A'}</p>
-            <p><strong>Email:</strong> ${user.email || 'N/A'}</p>
-            <p><strong>Display Name:</strong> ${user.displayName || 'N/A'}</p>
-          </div>
-        `).join('');
+        const postList = document.getElementById('postList');
+        postList.innerHTML = '';
+
+        posts.forEach(post => {
+          const div = document.createElement('div');
+          div.className = 'post-item';
+
+          // Handle different file types
+          if (post.endsWith('.mp4')) {
+            div.innerHTML = `<video controls src="${NGROK_BASE}/posts/${encodeURIComponent(post)}"></video>`;
+          } else if (post.endsWith('.png')) {
+            div.innerHTML = `<img src="${NGROK_BASE}/posts/${encodeURIComponent(post)}" alt="${post}"/>`;
+          } else if (post.endsWith('.txt')) {
+            fetch(`${NGROK_BASE}/posts/${encodeURIComponent(post)}`, {
+              method: 'GET',
+              headers: HEADERS,
+            })
+              .then(r => r.text())
+              .then(text => {
+                div.innerHTML = `<pre>${text}</pre>`;
+              });
+          }
+
+          postList.appendChild(div);
+        });
       } catch (error) {
         console.error(error);
-        document.getElementById('userList').innerHTML = '<p style="color:red;">Failed to load users.</p>';
+        document.getElementById('postList').innerHTML = '<p style="color:red;">Failed to load posts.</p>';
       }
     }
 
-// Fetch posts
-async function fetchPosts() {
-  try {
-    const res = await fetch('https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts', {
-      method: 'GET',
-      headers: new Headers({
-        'ngrok-skip-browser-warning': 'true',
-      }),
-    });
-    if (!res.ok) throw new Error('Failed to fetch posts');
-    const posts = await res.json();
-
-    const postList = document.getElementById('postList');
-    postList.innerHTML = '';
-
-    posts.forEach(post => {
-      const div = document.createElement('div');
-      div.className = 'post-item';
-
-      // Handle different file types
-      if (post.endsWith('.mp4')) {
-        div.innerHTML = `<video controls src="https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}"></video>`;
-      } else if (post.endsWith('.png')) {
-        div.innerHTML = `<img src="https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}" alt="${post}"/>`;
-      } else if (post.endsWith('.txt')) {
-        fetch(`https://d43e-2600-100f-a101-4e39-c697-6269-324d-2e7a.ngrok-free.app/posts/${encodeURIComponent(post)}`, {
-          method: 'GET',
-          headers: new Headers({
-            'ngrok-skip-browser-warning': 'true',
-          }),
-        })
-          .then(r => r.text())
-          .then(text => {
-            div.innerHTML = `<pre>${text}</pre>`;
-          });
-      }
-
-      postList.appendChild(div);
-    });
-  } catch (error) {
-    console.error(error);
-    document.getElementById('postList').innerHTML = '<p style="color:red;">Failed to load posts.</p>';
-  }
-}
-
-
-
-    fetchUsers();
     fetchPosts();
   </script>
 </body>
